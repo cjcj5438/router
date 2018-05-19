@@ -1,0 +1,11 @@
+<p>
+  fater works!
+  ID是:{{ID}}
+  Name是:{{Name}}
+</p>
+<!--和根路由不一样 当前路由的空路由   所以是 ./   -->
+<a [routerLink]="['./']">childA</a>
+<a [routerLink]="['./b',99]">childB</a>
+<!--子路有-->
+<!--RouterOuter-->
+<router-outlet></router-outlet>
