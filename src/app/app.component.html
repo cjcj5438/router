@@ -3,9 +3,40 @@
   Welcome to {{ title }}!
 </h1>
 <!--RouterLink 这里为什么是[]  不是字符串呢? 是为了写参数-->
-<a [routerLink]="['/']">主页</a>
-<a [routerLink]="['/product']">商品详情</a>
+<!--现在的问题是: 主页1 和主页2 不能同时产生路由-->
+<!--<a [routerLink]="['/']">主页1</a>-->
+
+<a [routerLink]="['/home','chen靖']">[主页2]</a>
+<a [routerLink]="['/product']" [queryParams]="{id:1}">[商品详情]</a>
+
+
+<!--辅助路由 锁定跳转路由home  辅助路由。可以显示控制多个路由 -->
+<!--<a [routerLink]="[{outlets:{primary:'home',aux:'chat'}}]">[打开chat]</a>-->
+<!--打开辅助路由-->
+<a [routerLink]="[{outlets:{aux:'chat'}}]">[打开chat]</a>
+<!--关闭辅助路由-->
+<a [routerLink]="[{outlets:{aux:null}}]">[关闭chat]</a>
+
+
+<hr>
+<a [routerLink]="['/productNavigate',1]">[商品详情获取参数]</a>
 <!--事件绑定-->
 <input type="button" value="商品详情" (click)="toProductDetails()">
+<hr>
+<!--重定向-->
+<a [routerLink]="['cdx']">[重定向]</a>
+<hr>
+<div>
+  <!--子路有-->
+  父子路由:<a [routerLink]="['/fater',1]" [queryParams]="{id:1}">[fater]</a>
+</div>
+<!--路由守卫
+CanActivate： 处理导航到某路由的情况
+CanDeactivate: 处理从当前路由离开的情况
+Resolve: 在激活之前获取路由数据-->
+
+
 <!--RouterOuter-->
 <router-outlet></router-outlet>
+<!--辅助路由插座-->
+<router-outlet name="aux"></router-outlet>
